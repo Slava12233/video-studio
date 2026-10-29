@@ -1,0 +1,10 @@
+.env
+renders/
+snapshots/
+.media/
+.transcode-cache/
+check.json
+*.mp4
+!inputs/*.mp4
+ai/clips/
+ai/frames/

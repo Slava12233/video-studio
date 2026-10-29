@@ -1,0 +1,22 @@
+{
+  "_readme": "Voice-over via fal.ai TTS. Copy to ai/tts.json, then: node ../../tools/fal/tts.mjs --project . --dry (then without --dry). eleven = ElevenLabs v4 ($0.08/1k chars, Hebrew with lang he, voices Adam/Brian/Daniel/George); minimax = MiniMax Speech 2.8 HD ($0.10/1k chars, voices Determined_Man/Elegant_Man/Deep_Voice_Man, <#0.4#> pause tags). Outputs: ai/audio/<id>.mp3. Read every take back with transcribe.mjs before using it. AI voice must be disclosed at the start of the video.",
+  "jobs": [
+    {
+      "id": "vo",
+      "engine": "eleven",
+      "voice": "George",
+      "lang": "he",
+      "textFile": "script/vo.txt",
+      "speed": 1.0,
+      "stability": 0.5,
+      "similarity": 0.75
+    },
+    {
+      "id": "vo-alt",
+      "engine": "minimax",
+      "voice": "Determined_Man",
+      "speed": 1.1,
+      "text": "שלום, זו בדיקת קול קצרה. <#0.4#> המשפט השני מגיע אחרי הפסקה."
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "_readme": "Generated stills (B-roll plates, abstract backgrounds, mockups). Copy to ai/images.json, then: node ../../tools/fal/generate-images.mjs --project . --dry. flux: cheap and fast (size presets or {width,height}); pro: Nano Banana Pro for text/brand mockups (aspect + resolution). Outputs: ai/images/<id>.png. Label as AI-generated when shown as if real.",
+  "jobs": [
+    {
+      "id": "skyline-night",
+      "model": "flux",
+      "size": "portrait_16_9",
+      "seed": 7,
+      "prompt": "Tel Aviv skyline at blue hour seen from a high balcony, warm apartment lights, soft haze, cinematic photograph, shallow depth of field."
+    },
+    {
+      "id": "crm-mockup",
+      "model": "pro",
+      "aspect": "16:9",
+      "resolution": "2K",
+      "prompt": "A clean laptop screen mockup showing a modern real-estate CRM dashboard with a lead list and a map, deep navy and teal UI, white background studio shot, no visible text except short placeholder labels."
+    }
+  ]
+}

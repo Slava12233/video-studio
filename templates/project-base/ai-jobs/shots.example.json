@@ -1,0 +1,29 @@
+{
+  "_readme": "Camera-move clips from stills. Copy to ai/shots.json, edit, then: node ../../tools/fal/image-to-video.mjs --project . --dry  (then without --dry). start = image path or {\"clip\": \"<id>\"} (last frame of that clip); end = optional image the move lands on. kling: 5 or 10 s, $0.07/s, 1920x1080 24 fps. h3: 1–15 s, $0.015–0.048/s. Outputs: ai/clips/<id>.mp4. Every clip is AI-generated and must be labeled on screen.",
+  "shots": [
+    {
+      "id": "living-push",
+      "start": "ai/images/living-169.png",
+      "engine": "kling",
+      "duration": 5,
+      "prompt": "Smooth steady cinematic real-estate camera move: slow push-in toward the balcony door, parallax on the sofa, consistent geometry, natural daylight, photorealistic, no people."
+    },
+    {
+      "id": "living-to-kitchen",
+      "start": { "clip": "living-push" },
+      "end": "ai/images/kitchen-169.png",
+      "engine": "kling",
+      "duration": 5,
+      "prompt": "Smooth steady cinematic camera move through the doorway from the living room into the kitchen, ending on the kitchen view exactly as in the final frame, consistent geometry, photorealistic, no people."
+    },
+    {
+      "id": "kitchen-loop",
+      "start": "ai/images/kitchen-169.png",
+      "end": "ai/images/kitchen-169.png",
+      "engine": "h3",
+      "duration": 8,
+      "resolution": "1080P",
+      "prompt": "Fixed shot looping video of the kitchen: only the light shifts gently and the curtain moves slightly, camera static, photorealistic."
+    }
+  ]
+}

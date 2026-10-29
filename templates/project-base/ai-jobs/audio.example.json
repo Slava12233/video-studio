@@ -1,0 +1,26 @@
+{
+  "_readme": "Music beds (Stable Audio 2.5, $0.20 per track, .wav) and sound effects (ElevenLabs SFX v2, $0.002/s, .mp3). Copy to ai/audio.json, then: node ../../tools/fal/audio.mjs --project . --dry. Outputs: ai/audio/<id>.wav|mp3.",
+  "jobs": [
+    {
+      "id": "bed",
+      "type": "music",
+      "seconds": 60,
+      "seed": 7,
+      "prompt": "Warm minimal cinematic piano with soft ambient synth pads and gentle string swells, elegant, calm, slowly building, real-estate film score, 96 BPM, no drums, no vocals, instrumental, pristine studio quality"
+    },
+    {
+      "id": "whoosh",
+      "type": "sfx",
+      "seconds": 1.0,
+      "influence": 0.5,
+      "prompt": "soft short cinematic whoosh transition, airy, no impact"
+    },
+    {
+      "id": "door",
+      "type": "sfx",
+      "seconds": 2.0,
+      "influence": 0.5,
+      "prompt": "a smooth sliding glass door glides open softly, quiet interior, one gentle whoosh of air"
+    }
+  ]
+}

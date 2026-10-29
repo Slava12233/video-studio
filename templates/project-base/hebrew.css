@@ -1,0 +1,57 @@
+/* Hebrew / RTL helpers + the studio's local fonts + the brand palette.
+   tools/new-video.mjs writes this file into every project as assets/hebrew.css (fonts in assets/fonts/) and replaces
+   the @palette marker with brand/<name>/palette.css. Link it from index.html:
+     <link rel="stylesheet" href="assets/hebrew.css" />
+   Fonts are local on purpose: renders are offline and deterministic. Never load Google Fonts at render time. */
+
+/* Heebo: Hebrew subsets carry a unicode-range so Latin falls through to the Latin files. */
+@font-face { font-family: "Heebo"; src: url("fonts/heebo-hebrew-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: "Heebo"; src: url("fonts/heebo-hebrew-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: "Heebo"; src: url("fonts/heebo-hebrew-800-normal.woff2") format("woff2"); font-weight: 800; font-display: block; unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: "Heebo"; src: url("fonts/heebo-hebrew-900-normal.woff2") format("woff2"); font-weight: 900; font-display: block; unicode-range: U+0590-05FF, U+200C-2010, U+20AA, U+25CC, U+FB1D-FB4F; }
+@font-face { font-family: "Heebo"; src: url("fonts/heebo-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: block; }
+@font-face { font-family: "Heebo"; src: url("fonts/heebo-latin-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+@font-face { font-family: "Heebo"; src: url("fonts/heebo-latin-900-normal.woff2") format("woff2"); font-weight: 900; font-display: block; }
+
+/* Rubik: heavy display face for big numbers and one-word punches. */
+@font-face { font-family: "Rubik"; src: url("fonts/rubik-hebrew-700-normal.woff2") format("woff2"); font-weight: 700; font-display: block; }
+@font-face { font-family: "Rubik"; src: url("fonts/rubik-hebrew-800-normal.woff2") format("woff2"); font-weight: 800; font-display: block; }
+@font-face { font-family: "Rubik"; src: url("fonts/rubik-hebrew-900-normal.woff2") format("woff2"); font-weight: 900; font-display: block; }
+
+/* Inter: Latin body/UI text, English captions. */
+@font-face { font-family: "Inter"; src: url("fonts/Inter-400-latin.woff2") format("woff2"); font-weight: 400; font-display: block; }
+@font-face { font-family: "Inter"; src: url("fonts/Inter-700-latin.woff2") format("woff2"); font-weight: 700; font-display: block; }
+
+:root {
+  --he-font: "Heebo", "Rubik", "Inter", system-ui, sans-serif;
+  --display-font: "Rubik", "Heebo", sans-serif;
+  --latin-font: "Inter", "Heebo", system-ui, sans-serif;
+}
+
+/* @palette */
+
+/* Hebrew text block: RTL, right-aligned, isolated from surrounding bidi. Put dir="rtl" on elements, never on <html>. */
+.he { direction: rtl; text-align: right; unicode-bidi: isolate; font-family: var(--he-font); }
+.he.center { text-align: center; }
+.he.left { text-align: left; }
+
+/* Numbers, prices, English words, URLs inside a Hebrew line. */
+.ltr { direction: ltr; unicode-bidi: isolate; display: inline-block; }
+.num { font-family: var(--display-font); font-variant-numeric: tabular-nums; direction: ltr; unicode-bidi: isolate; display: inline-block; }
+
+/* Caption line: center, heavy, two lines max. Keep it above the bottom 250 px on 9:16 (platform UI). */
+.caption { direction: rtl; text-align: center; font-family: var(--he-font); font-weight: 800; line-height: 1.25; text-wrap: balance; }
+.caption .hl { color: var(--accent); }
+
+/* Caption pill (word-highlight reels): white on ink, or ink on accent for the active word. */
+.pill { display: inline-block; padding: 0.18em 0.55em; border-radius: 0.35em; background: var(--ink); color: var(--white); white-space: nowrap; }
+.pill.on { background: var(--accent); color: var(--ink); }
+
+/* Mandatory on-screen disclosure for AI-generated or AI-edited visuals (texts in brand/_default/DISCLOSURE.md). */
+.ai-badge {
+  position: absolute; right: 48px; bottom: 300px; z-index: 50;
+  direction: rtl; font: 700 26px/1 var(--he-font); letter-spacing: 0.01em;
+  color: var(--white); background: rgba(16, 24, 40, 0.72);
+  padding: 10px 16px; border-radius: 8px;
+}
+.ai-badge.landscape { bottom: 48px; }

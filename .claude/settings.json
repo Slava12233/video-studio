@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "extraKnownMarketplaces": {
+    "hyperframes": {
+      "source": { "source": "github", "repo": "heygen-com/hyperframes" }
+    }
+  },
+  "enabledPlugins": {
+    "hyperframes@hyperframes": true
+  },
+  "permissions": {
+    "allow": [
+      "Bash(node tools/*)",
+      "Bash(node ../../tools/*)",
+      "Bash(node ../tools/*)",
+      "Bash(node *hf.mjs *)",
+      "Bash(node *plugin-cli.mjs *)",
+      "Bash(node --check *)",
+      "Bash(ffmpeg *)",
+      "Bash(ffprobe *)",
+      "Bash(ls *)",
+      "Bash(dir *)",
+      "Bash(du *)",
+      "Bash(find *)",
+      "Bash(mkdir *)",
+      "Bash(cp *)",
+      "Bash(git status *)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git add *)"
+    ],
+    "ask": [
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(node *hf.mjs publish *)",
+      "Bash(npx hyperframes publish *)",
+      "Bash(node *hf.mjs cloud *)",
+      "Bash(node *hf.mjs upgrade *)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./**/.env)",
+      "Bash(cat .env)",
+      "Bash(cat ./.env)",
+      "Bash(rm -rf *)",
+      "Bash(rmdir /s *)",
+      "Bash(del /s *)",
+      "Edit(./projects/*/inputs/**)",
+      "Write(./projects/*/inputs/**)"
+    ]
+  },
+  "env": {
+    "HYPERFRAMES_NO_UPDATE_CHECK": "1"
+  }
+}

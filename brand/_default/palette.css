@@ -1,0 +1,14 @@
+/* Default brand palette (neutral, Hebrew-first). Same token names in every brand folder. */
+:root {
+  --primary: #0b1220;
+  --primary-deep: #05080f;
+  --ink: #101828;
+  --accent: #ffd60a;
+  --accent-2: #2dd4bf;
+  --cta: #ff2e63;
+  --gray: #9aa3b2;
+  --paper: #f7f7f5;
+  --white: #ffffff;
+  --bg-dark: var(--primary);
+  --bg-light: var(--paper);
+}

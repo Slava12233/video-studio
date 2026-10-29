@@ -1,0 +1,21 @@
+{
+  "_readme": "Photo edits with Nano Banana. Copy to ai/edits.json, edit, then: node ../../tools/fal/edit-images.mjs --project . --dry  (then without --dry). Describe what you WANT to see, then the KEEP sentence. Outputs: ai/images/<id>.png. Every output is AI-edited and must be labeled on screen.",
+  "jobs": [
+    {
+      "id": "living",
+      "src": "inputs/photos/living.jpg",
+      "model": "nb2",
+      "resolution": "2K",
+      "note": "declutter",
+      "prompt": "Remove the cables and the cardboard box from the floor so the parquet is fully visible there, and straighten the cushions on the sofa. Keep everything else exactly the same: same camera angle and framing, same lighting and colors, same walls, floor, furniture and fixtures. Photorealistic. Do not add any new objects, people or text."
+    },
+    {
+      "id": "bedroom-staged",
+      "src": "inputs/photos/bedroom-empty.jpg",
+      "model": "pro",
+      "resolution": "2K",
+      "note": "virtual staging — MUST be labeled as staging",
+      "prompt": "Furnish this empty bedroom with a light-oak double bed with white bedding and two small bedside tables with warm lamps, in a calm Scandinavian style that fits the room's proportions. Keep the room itself exactly the same: same camera angle and framing, same window, walls, floor, ceiling and light. Photorealistic. No people, no text."
+    }
+  ]
+}

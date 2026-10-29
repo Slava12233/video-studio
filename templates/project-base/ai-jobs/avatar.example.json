@@ -1,0 +1,19 @@
+{
+  "_readme": "Audio-driven presenter clips. Copy to ai/avatar.json, then: node ../../tools/fal/avatar.mjs --project . --dry (then without --dry). omnihuman = bytedance/omnihuman/v2 ($0.105/s, best gestures, output 1284x716, chunks <= 17 s); kling = Kling Avatar v2 Pro ($0.115/s, 1920x1072); heygen = HeyGen Avatar 4 ($0.10/s, 1080p, tighter crop). image = waist-up still with both hands visible; audio = one VO chunk split at a sentence pause. Outputs: ai/clips/<id>.mp4. Every clip is an AI-generated presenter and must be labeled on screen for its whole visible time.",
+  "jobs": [
+    {
+      "id": "seg-01",
+      "engine": "omnihuman",
+      "image": "inputs/avatar/wide.png",
+      "audio": "ai/audio/vo-01.mp3",
+      "prompt": "A calm presenter speaks to camera with natural hand gestures, steady framing, no camera movement."
+    },
+    {
+      "id": "seg-02",
+      "engine": "omnihuman",
+      "image": "inputs/avatar/medium.png",
+      "audio": "ai/audio/vo-02.mp3",
+      "prompt": "A calm presenter speaks to camera with natural hand gestures, steady framing, no camera movement."
+    }
+  ]
+}
