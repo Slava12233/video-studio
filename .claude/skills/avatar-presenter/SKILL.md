@@ -44,7 +44,7 @@ section).
 
 ## 4. Build
 - `/new-video avatar-explainer` project (if not created yet) with the client brand. Build with
-  `hyperframes:general-video`: presenter clips on one track cut on sentence ends, caption pops as timed divs derived
+  `hf:general-video`: presenter clips on one track cut on sentence ends, caption pops as timed divs derived
   from the line bounds, mockups sliding in from the sides, price card, logo top-left, end card. Inline all data.
 - Music bed under the voice with the voiceover carve at strength ~0.35 on a 0.55 bed (bed about -31 dB in pauses).
 - Disclosure: `.ai-badge` "AI-generated presenter" for the whole visible time of every avatar clip, AI-voice note at

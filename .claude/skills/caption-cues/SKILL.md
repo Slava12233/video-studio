@@ -1,6 +1,6 @@
 ---
 name: caption-cues
-description: Turn a corrected word-level Hebrew (or English) transcript into a caption and beat plan for a reel - 2-4 word cues timed to speech, emphasis words, word-highlight pills, pause cuts, and one graphic event per 3-5 s beat (callout card, number slam, lower-third, B-roll insert). Use after /transcribe and before hyperframes:embedded-captions or hyperframes:talking-head-recut, or when Slava asks to "add captions", "make it pop", "plan the graphics for this clip".
+description: Turn a corrected word-level Hebrew (or English) transcript into a caption and beat plan for a reel - 2-4 word cues timed to speech, emphasis words, word-highlight pills, pause cuts, and one graphic event per 3-5 s beat (callout card, number slam, lower-third, B-roll insert). Use after /transcribe and before hf:embedded-captions or hf:talking-head-recut, or when Slava asks to "add captions", "make it pop", "plan the graphics for this clip".
 argument-hint: [transcript.json|words.corrected.json] [--style rail|pills|cinematic] [--beats]
 ---
 
@@ -33,5 +33,5 @@ Arguments: `$ARGUMENTS`.
 
 ## Hand-off
 Inline `captions.json` into the composition (no render-time fetch). Plain subtitles ->
-`hyperframes:embedded-captions`; designed overlays from `beats.md` -> `hyperframes:talking-head-recut`. Verify on
+`hf:embedded-captions`; designed overlays from `beats.md` -> `hf:talking-head-recut`. Verify on
 frames from the rendered file at three cue times (`/review-cut`).

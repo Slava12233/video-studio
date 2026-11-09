@@ -1,0 +1,52 @@
+filters:
+  and:
+    - 'type == "project"'
+    - '!file.inFolder("memory/templates")'
+
+properties:
+  file.name:
+    displayName: "פרויקט"
+  kind:
+    displayName: "סוג"
+  status:
+    displayName: "שלב"
+  spend_usd:
+    displayName: "הוצאה ($)"
+  next:
+    displayName: "הצעד הבא"
+  updated:
+    displayName: "עודכן"
+  deliverable:
+    displayName: "קובץ סופי"
+
+views:
+  - type: table
+    name: "פרויקטים לפי שלב"
+    groupBy:
+      property: status
+      direction: ASC
+    order:
+      - file.name
+      - kind
+      - status
+      - spend_usd
+      - next
+      - updated
+    sort:
+      - property: updated
+        direction: DESC
+
+  - type: table
+    name: "נמסרו"
+    filters:
+      and:
+        - 'status == "delivered"'
+    order:
+      - file.name
+      - kind
+      - deliverable
+      - spend_usd
+      - updated
+    sort:
+      - property: updated
+        direction: DESC

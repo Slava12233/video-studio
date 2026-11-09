@@ -7,5 +7,10 @@
 - A key value that ever appears in a chat or a file is burned: say so and ask Slava to rotate it at fal.ai.
 - Per-project `.env` files override the root one for that project only (same rules).
 - Hooks, `settings*.json` outside this repo, plugins and CI secrets are installed by Slava only. The project
-  `.claude/settings.json` here carries no hooks and no secrets; propose changes to it as a paste block.
+  `.claude/settings.json` here carries no secrets; its three memory hook events (SessionStart, SubagentStart,
+  PreCompact) were added on Slava's yes in chat on 2026-11-09, and the same evening, on his yes, the marketplace
+  copy of HyperFrames was set to `false` under `enabledPlugins` (the skills ship in the repo as `hf:*`); restore
+  blocks: `docs/hooks-paste-block.md`. Propose any further change to it as a paste block.
+- `.env` must not appear in a Bash command line at all (the deny rules refuse the whole call): check the key by name
+  with `node tools/fal/fal.mjs --project .` (prints set / MISSING).
 - Secrets never go to git: `.env*` is ignored except `.env.example`, which holds names and empty values only.

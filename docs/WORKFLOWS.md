@@ -1,6 +1,6 @@
 # Workflows: the seven video types
 
-Each type maps to a HyperFrames workflow (loaded through the `hyperframes:hyperframes` router) plus studio tools and
+Each type maps to a HyperFrames workflow (loaded through the `hf:hyperframes` router) plus studio tools and
 skills. Times are for a 32 GB laptop; prices are fal.ai list prices (dates in `docs/FAL-ENDPOINTS.md`).
 
 ## 1. Talking-head reel (`/new-video talking-head <slug>`)
@@ -8,8 +8,8 @@ skills. Times are for a 32 GB laptop; prices are fal.ai list prices (dates in `d
 captions, callout cards, optional B-roll and lower-thirds.
 1. Scaffold with `--video <file>`; the CLI converts the footage to H.264 inside the project.
 2. `/transcribe inputs/<file> --lang he --srt` -> `transcript.json`. Proof-read names, brand words, numbers.
-3. Pick the look: plain captions -> `hyperframes:embedded-captions` (quiet `anchor` rail by default); designed
-   overlays (titles, callouts, quotes, PiP) -> `hyperframes:talking-head-recut`. `/caption-cues` builds the Hebrew cue
+3. Pick the look: plain captions -> `hf:embedded-captions` (quiet `anchor` rail by default); designed
+   overlays (titles, callouts, quotes, PiP) -> `hf:talking-head-recut`. `/caption-cues` builds the Hebrew cue
    list (2-4 words, emphasis words, pills) from the corrected transcript.
 4. B-roll: own footage in `inputs/` first; missing shots -> `/ai-lab image` or `clip`, labeled. Inserts <= 1.4 s,
    always back to the presenter on an emphasized word.
@@ -33,7 +33,7 @@ Time: 30-60 min. Cost: transcript $0.01-0.05 plus any B-roll.
    Everything else is Ken Burns in HyperFrames for free.
 5. Music + SFX: `ai/audio.json` -> `/ai-lab audio`. Beats: `node tools/hf.mjs beats` with
    `<audio data-timeline-role="music">`.
-6. Build with `hyperframes:general-video` in companion mode: one standalone `index.html`, untimed `.scene` layers,
+6. Build with `hf:general-video` in companion mode: one standalone `index.html`, untimed `.scene` layers,
    `<video data-start>` inside them, catalog transitions, `.he` labels in the safe zone, `.ai-badge landscape` on every
    AI clip for its whole visible time.
 7. Render 24 fps; over 45 s renders segmented (`deliver.mjs`), or in parts when the machine is busy.
@@ -54,18 +54,18 @@ Time: half a day. Cost: $15-30 (a voice change after clips exist costs about $13
 
 ## 4. Product promo / explainer (`/new-video promo <slug>`)
 **Input:** a URL, a script or notes. **Output:** 16:9 (plus 9:16), 20-60 s, product captures, kinetic text, optional voice.
-1. URL or site tour -> `hyperframes:product-launch-video` (captures the site's own visuals). Text only ->
-   `hyperframes:faceless-explainer`.
+1. URL or site tour -> `hf:product-launch-video` (captures the site's own visuals). Text only ->
+   `hf:faceless-explainer`.
 2. Voice: recorded in `inputs/` preferred; AI voice only with a go and a disclosure note at the start (`/ai-lab tts`).
 3. Hebrew on screen: `.he` blocks, numbers in `.num`, product names in `.ltr`. UI captures at 100 % scale.
-4. Charts and stats -> `hyperframes:motion-graphics` sub-composition; registry blocks (`hyperframes:hyperframes-registry`)
+4. Charts and stats -> `hf:motion-graphics` sub-composition; registry blocks (`hf:hyperframes-registry`)
    before hand-building any named effect.
 5. Deliver 16:9 at 30 fps; 9:16 variant as a second composition rendered with `--composition`.
 Time: 1-2 h. Cost: usually $0 to $1.
 
 ## 5. Social ad / short reel (`/new-video social-ad <slug>`)
 **Input:** a hook line, a number or claim, optional footage/stills, optional music. **Output:** 9:16 (plus 1:1, 4:5), 6-30 s.
-1. Under ~30 s, motion is the message -> `hyperframes:motion-graphics` (kinetic type, count-up, logo sting).
+1. Under ~30 s, motion is the message -> `hf:motion-graphics` (kinetic type, count-up, logo sting).
 2. Hook in the first 1.5 s, CTA in the last 2 s, `--cta` color only on the CTA, logo sting from `assets/logo.svg`.
 3. Safe zones: nothing important in the bottom 250 px or top 200 px. Hebrew count-ups: digits in `.num`, words in `.he`.
 4. Variants are extra compositions in the same project; render each with `--composition` and `--name`.
@@ -76,7 +76,7 @@ Time: 20-60 min. Cost: $0-0.50.
 **Output:** 9:16 or 16:9, the track's length, every cut on the beat grid.
 1. Track into `inputs/` (or `/ai-lab audio` for a generated bed, labeled in DISCLOSURE.txt). `node tools/hf.mjs beats`
    for the grid; sections in `BRIEF.md`.
-2. `hyperframes:music-to-video`: the music drives all pacing; user stills/clips cut onto the grid; missing visuals are
+2. `hf:music-to-video`: the music drives all pacing; user stills/clips cut onto the grid; missing visuals are
    typography or generated plates (labeled when shown as real).
 3. Lyrics / text follow the Hebrew rules; hits on downbeats; one visual idea per bar.
 Time: 1-2 h. Cost: $0-0.50.
@@ -84,7 +84,7 @@ Time: 1-2 h. Cost: $0-0.50.
 ## 7. Faceless explainer (`/new-video explainer <slug>`)
 **Input:** an article, notes or a topic. **Output:** 16:9 (plus 9:16), 45-90 s, invented visuals per scene.
 1. Source text in `script/source.md`; one takeaway; 3-5 beats, one visual idea each (typography, diagram, chart).
-2. `hyperframes:faceless-explainer`; no site capture, no stock footage. Numbers only from the source text.
+2. `hf:faceless-explainer`; no site capture, no stock footage. Numbers only from the source text.
 3. Narration: AI voice via `/ai-lab tts` (disclosed) or captions only.
 Time: 1-2 h. Cost: $0-1.
 

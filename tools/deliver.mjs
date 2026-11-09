@@ -11,6 +11,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { STUDIO_ROOT, ffprobe, fmtUsd, isMainModule, parseArgs, resolveProject } from "./lib/studio.mjs";
+import { logProject, logSession } from "./memory/log.mjs";
 import { runHf } from "./hf.mjs";
 import { poster } from "./media.mjs";
 import { normalize, measure } from "./loudnorm.mjs";
@@ -109,6 +110,16 @@ async function main() {
   if (info.hasAudio) { try { const mm = measure(final); loudness = { lufs: Number(mm.input_i), true_peak_dbtp: Number(mm.input_tp) }; } catch { /* non-fatal */ } }
   const facts = { project: slug, brand, file: path.basename(final), poster: path.basename(posterFile), duration_s: +info.duration.toFixed(2), width: info.width, height: info.height, fps: info.fps, size_mb: +(info.sizeBytes / 2 ** 20).toFixed(1), has_audio: info.hasAudio, loudness, ai_assets: items.filter((i) => i.disclosure && !/Transcript only/.test(i.disclosure)).length, ai_spend_usd: total_usd, delivered: new Date().toISOString() };
   fs.writeFileSync(path.join(outDir, "delivery.json"), JSON.stringify(facts, null, 2));
+
+  // Memory (memory/README.md): the project note gets status delivered, the deliverable path and the spend; today's
+  // session note gets a line. A missing note is reported, never fatal: the delivery itself is done.
+  try {
+    const rel = path.relative(STUDIO_ROOT, final).split(path.sep).join("/");
+    logProject(STUDIO_ROOT, slug, `delivered \`${rel}\`: ${info.width}x${info.height}, ${info.duration.toFixed(1)} s, ${info.fps} fps, ${facts.size_mb} MB, ${loudness ? `${loudness.lufs} LUFS` : "loudness unmeasured"}, ${facts.ai_assets} disclosed AI asset(s), ${fmtUsd(total_usd)}`, { status: "delivered", deliverable: rel, next: "verify three frames of the delivered file at caption / badge times, then report to Slava" });
+    logSession(STUDIO_ROOT, `delivered \`${rel}\` (${info.duration.toFixed(1)} s, ${fmtUsd(total_usd)} AI spend, ${facts.ai_assets} AI asset(s))`);
+  } catch (e) {
+    console.error(`memory: delivery not logged (${e.message}). Run: node tools/memory/log.mjs project ${slug} "delivered ..." --status delivered`);
+  }
 
   console.log("5/5 done");
   console.log(`  video   : ${final}`);

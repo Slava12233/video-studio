@@ -1,0 +1,35 @@
+filters:
+  and:
+    - 'type == "reference"'
+    - '!file.inFolder("memory/templates")'
+
+properties:
+  file.name:
+    displayName: "מקור"
+  verdict:
+    displayName: "הכרעה"
+  license:
+    displayName: "רישיון"
+  checked:
+    displayName: "נבדק"
+  summary:
+    displayName: "תקציר"
+  url:
+    displayName: "קישור"
+
+views:
+  - type: table
+    name: "לפי הכרעה"
+    groupBy:
+      property: verdict
+      direction: ASC
+    order:
+      - file.name
+      - verdict
+      - license
+      - checked
+      - summary
+      - url
+    sort:
+      - property: checked
+        direction: DESC

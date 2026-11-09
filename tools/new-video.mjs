@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-// Scaffold a new video project under projects/<date>-<slug>/: a HyperFrames project (via the installed plugin's
-// CLI, pinned CLI version), the brand palette + local fonts + RTL css, a BRIEF.md from the template for this
+// Scaffold a new video project under projects/<date>-<slug>/: a HyperFrames project (via the repo's pinned
+// HyperFrames release, tools/hf.mjs), the brand palette + local fonts + RTL css, a BRIEF.md from the template for this
 // video type, inputs/ (read-only originals), ai/ (generated media) and example AI job files.
 //
 //   node tools/new-video.mjs <type> <slug> [--brand <name>] [--resolution portrait|landscape|square]
@@ -18,15 +18,17 @@ import fs from "node:fs";
 import path from "node:path";
 import { STUDIO_ROOT, copyDir, isMainModule, parseArgs, slugify, today } from "./lib/studio.mjs";
 import { runHf } from "./hf.mjs";
+import { createNote } from "./memory/new-note.mjs";
+import { logSession } from "./memory/log.mjs";
 
 export const TYPES = {
-  "talking-head": { resolution: "portrait", skill: "embedded-captions", brief: "talking-head.md", workflow: "hyperframes:embedded-captions (captions only) or hyperframes:talking-head-recut (graphic overlays)" },
-  "photo-film": { resolution: "landscape", skill: "general-video", brief: "photo-film.md", workflow: "hyperframes:general-video in companion mode; AI camera moves via /ai-lab clip" },
-  "avatar-explainer": { resolution: "landscape", skill: "general-video", brief: "avatar-explainer.md", workflow: "/avatar-presenter (script -> TTS -> avatar clips), then hyperframes:general-video for captions, mockups and the end card" },
-  promo: { resolution: "landscape", skill: "product-launch-video", brief: "promo.md", workflow: "hyperframes:product-launch-video (from a URL or brief) or hyperframes:faceless-explainer (text only)" },
-  "social-ad": { resolution: "portrait", skill: "motion-graphics", brief: "social-ad.md", workflow: "hyperframes:motion-graphics (under ~30 s, motion is the message)" },
-  "music-video": { resolution: "portrait", skill: "music-to-video", brief: "music-video.md", workflow: "hyperframes:music-to-video (the track's beat grid drives every cut)" },
-  explainer: { resolution: "landscape", skill: "faceless-explainer", brief: "explainer.md", workflow: "hyperframes:faceless-explainer (invented visuals per scene, optional AI voice)" },
+  "talking-head": { resolution: "portrait", skill: "embedded-captions", brief: "talking-head.md", workflow: "hf:embedded-captions (captions only) or hf:talking-head-recut (graphic overlays)" },
+  "photo-film": { resolution: "landscape", skill: "general-video", brief: "photo-film.md", workflow: "hf:general-video in companion mode; AI camera moves via /ai-lab clip" },
+  "avatar-explainer": { resolution: "landscape", skill: "general-video", brief: "avatar-explainer.md", workflow: "/avatar-presenter (script -> TTS -> avatar clips), then hf:general-video for captions, mockups and the end card" },
+  promo: { resolution: "landscape", skill: "product-launch-video", brief: "promo.md", workflow: "hf:product-launch-video (from a URL or brief) or hf:faceless-explainer (text only)" },
+  "social-ad": { resolution: "portrait", skill: "motion-graphics", brief: "social-ad.md", workflow: "hf:motion-graphics (under ~30 s, motion is the message)" },
+  "music-video": { resolution: "portrait", skill: "music-to-video", brief: "music-video.md", workflow: "hf:music-to-video (the track's beat grid drives every cut)" },
+  explainer: { resolution: "landscape", skill: "faceless-explainer", brief: "explainer.md", workflow: "hf:faceless-explainer (invented visuals per scene, optional AI voice)" },
 };
 
 export function listBrands() {
@@ -96,6 +98,14 @@ export function scaffold({ type, slug, brand = "_default", resolution, video, au
     "",
   ].join("\n"), "utf8");
 
+  // 6. The project's memory note (the second brain, memory/README.md): created with the folder, logged in today's session.
+  try {
+    createNote(STUDIO_ROOT, "project", name, { summary: `${type} video, brand ${brand}, ${res}; brief not filled yet.`, kind: type, brand, resolution: res, date });
+    logSession(STUDIO_ROOT, `project scaffolded: \`projects/${name}\` (${type}, ${brand}, ${res}); brief to fill`);
+  } catch (e) {
+    console.error(`memory: project note not written (${e.message}). Create it: node tools/memory/new-note.mjs project ${name} --summary "..."`);
+  }
+
   return { dir, name, type, brand, resolution: res, workflow: spec.workflow };
 }
 
@@ -110,6 +120,6 @@ if (isMainModule(import.meta.url)) {
     const out = scaffold({ type, slug, brand: flags.brand ? String(flags.brand) : "_default", resolution: flags.resolution || resPositional, video: flags.video, audio: flags.audio, date: flags.date });
     console.log(`\nproject ready: ${out.dir}`);
     console.log(`  type ${out.type} | brand ${out.brand} | ${out.resolution} | workflow: ${out.workflow}`);
-    console.log("  next: copy source files into inputs/, fill BRIEF.md, then invoke the hyperframes:hyperframes skill inside that folder.");
+    console.log("  next: copy source files into inputs/, fill BRIEF.md, then invoke the hf:hyperframes skill inside that folder.");
   } catch (e) { console.error(`error: ${e.message}`); process.exit(1); }
 }

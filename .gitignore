@@ -42,3 +42,13 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
+
+# Obsidian: per-machine workspace state and caches stay local; app.json, core-plugins.json, appearance.json,
+# graph.json, templates.json and bookmarks.json travel with the vault
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+.obsidian/workspaces.json
+.obsidian/cache
+.obsidian/plugins/
+.trash/
+memory/archive/attachments/

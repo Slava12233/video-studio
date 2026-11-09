@@ -24,7 +24,7 @@ Arguments: `$ARGUMENTS` (type, slug, optional brand / resolution / source files)
    node tools/new-video.mjs <type> <slug> [--brand <name>] [--resolution ...] [--video <file>] [--audio <file>]
    ```
    Pass `--video` / `--audio` when the source file already exists. The tool runs `hyperframes init` through the
-   installed plugin's CLI (pinned version), then adds `inputs/`, `ai/` (with every `*.example.json`), `script/`,
+   repo's pinned HyperFrames release (`tools/hf.mjs`), then adds `inputs/`, `ai/` (with every `*.example.json`), `script/`,
    `renders/`, `assets/fonts` + `assets/hebrew.css` (brand palette inlined), the brand logo, `BRIEF.md`,
    `STUDIO-NOTES.md`. HyperFrames' own `CLAUDE.md` inside the project is its rulebook: keep it.
 2. Copy source files into `inputs/` (copy, never move; originals stay untouched). Phone footage that is not H.264 MP4:
@@ -33,6 +33,6 @@ Arguments: `$ARGUMENTS` (type, slug, optional brand / resolution / source files)
    brand, facts allowed on screen, deadline. One question at a time, each with a recommended default; stop asking
    when the build can start. Keep `Brand: <name>` on the header line (`deliver.mjs` reads it).
 4. Read `docs/WORKFLOWS.md` (the section for this type) and skim `docs/FIELD-NOTES.md` once per session.
-5. Hand off: `cd` into the project and invoke the `hyperframes:hyperframes` skill with the brief. Build there. Every
+5. Hand off: `cd` into the project and invoke the `hf:hyperframes` skill with the brief. Build there. Every
    HyperFrames command is `node ../../tools/hf.mjs <cmd>`; never bare `npx hyperframes`. For an `avatar-explainer`,
    run `/avatar-presenter` before the HyperFrames build; for captions, `/transcribe` then `/caption-cues`.

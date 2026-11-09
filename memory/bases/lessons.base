@@ -1,0 +1,62 @@
+filters:
+  and:
+    - 'type == "lesson"'
+    - '!file.inFolder("memory/templates")'
+
+properties:
+  file.name:
+    displayName: "למידה"
+  created:
+    displayName: "נוצר"
+  summary:
+    displayName: "תקציר"
+  status:
+    displayName: "סטטוס"
+  categories:
+    displayName: "קטגוריות"
+  promoted_to:
+    displayName: "קודם אל"
+
+views:
+  - type: table
+    name: "החדשות קודם"
+    order:
+      - file.name
+      - created
+      - summary
+      - status
+      - categories
+    sort:
+      - property: created
+        direction: DESC
+
+  - type: table
+    name: "לפי קטגוריה"
+    filters:
+      and:
+        - 'status != "superseded"'
+    groupBy:
+      property: categories
+      direction: ASC
+    order:
+      - file.name
+      - created
+      - summary
+      - status
+    sort:
+      - property: created
+        direction: DESC
+
+  - type: table
+    name: "קודמו למסמכים"
+    filters:
+      and:
+        - '!promoted_to.isEmpty()'
+    order:
+      - file.name
+      - promoted_to
+      - created
+      - summary
+    sort:
+      - property: created
+        direction: DESC

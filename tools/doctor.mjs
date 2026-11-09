@@ -11,6 +11,10 @@ import path from "node:path";
 import { spawn, spawnSync } from "node:child_process";
 import { IS_WIN, STUDIO_ROOT, ffprobe, findFfmpegDir, isMainModule, loadEnv, parseArgs } from "./lib/studio.mjs";
 import { findPlugin, invocation, runHf } from "./hf.mjs";
+import { verifyVendored } from "./vendor-hyperframes.mjs";
+import { status as obsidianStatus } from "./memory/obsidian-setup.mjs";
+import { buildAll } from "./memory/build-hot.mjs";
+import { lint } from "./memory/lint.mjs";
 
 const results = [];
 const add = (name, ok, detail, { required = true, fix = "" } = {}) => { results.push({ name, ok, detail, required, fix }); return ok; };
@@ -34,7 +38,17 @@ function checkEnvironment() {
   const claude = ver(IS_WIN ? "claude.exe" : "claude", ["--version"], { shell: IS_WIN }) || ver("claude", ["--version"], { shell: true });
   add("Claude Code", Boolean(claude), claude || "not found on PATH", { fix: "PowerShell: irm https://claude.ai/install.ps1 | iex, then reopen the terminal" });
   const plugin = findPlugin();
-  add("HyperFrames plugin", Boolean(plugin), plugin ? `v${plugin.version} at ${plugin.root}` : "not installed", { fix: "claude plugin marketplace add heygen-com/hyperframes && claude plugin install hyperframes@hyperframes (or trust this folder in Claude, then /reload-plugins)" });
+  add("HyperFrames plugin", Boolean(plugin), plugin ? `v${plugin.version} (${plugin.source}) at ${plugin.root}` : "not found", { fix: "node tools/vendor-hyperframes.mjs restores the repo's copy from a plugin under ~/.claude/plugins (install one once: claude plugin marketplace add heygen-com/hyperframes && claude plugin install hyperframes@hyperframes)" });
+  try {
+    const v = verifyVendored(STUDIO_ROOT);
+    const cache = v.cache ? (v.present && v.cache.version === v.version ? "; plugin cache: same release" : `; plugin cache: v${v.cache.version}${v.present ? " (differs: a re-vendor is Slava's call)" : ""}`) : "; plugin cache: none";
+    add("HyperFrames skills (vendored)", v.ok, v.present ? `v${v.version}, ${v.skills} skills, ${v.files} files ${v.ok ? "match VENDORED.json" : `DRIFT: ${v.problems.join("; ")}`}${cache}` : `${v.problems.join("; ")}${cache}`, { required: false, fix: "node tools/vendor-hyperframes.mjs --check names the drift; re-vendor (node tools/vendor-hyperframes.mjs) only on Slava's word, it changes the pinned release" });
+  } catch (e) { add("HyperFrames skills (vendored)", false, e.message, { required: false }); }
+  try {
+    const settings = JSON.parse(fs.readFileSync(path.join(STUDIO_ROOT, ".claude", "settings.json"), "utf8"));
+    const marketplaceCopy = settings.enabledPlugins?.["hyperframes@hyperframes"];
+    add("HyperFrames marketplace copy", marketplaceCopy === false, marketplaceCopy === false ? "off in .claude/settings.json (only the vendored hf:* skills load)" : "still on in .claude/settings.json: every HyperFrames skill is offered twice (hyperframes:* and hf:*)", { required: false, fix: "Slava sets \"hyperframes@hyperframes\": false under enabledPlugins in .claude/settings.json (or claude plugin disable hyperframes@hyperframes --scope project), then /reload-plugins" });
+  } catch { /* no project settings: nothing to report */ }
   const totalGb = os.totalmem() / 2 ** 30;
   add("Memory", totalGb >= 8, `${totalGb.toFixed(1)} GB total, ${(os.freemem() / 2 ** 30).toFixed(1)} GB free${totalGb < 24 ? " -> render with --workers 2" : ""}`, { required: false, fix: "close other apps before rendering" });
   try {
@@ -142,10 +156,36 @@ async function smokeRender() {
   if (ok) fs.rmSync(dir, { recursive: true, force: true });
 }
 
+// The second brain (memory/README.md): the vault's generated notes, the lint, the hooks and Obsidian. All optional:
+// the studio renders without them; the memory contract still asks every session to read memory/HOT.md itself.
+function checkMemory() {
+  const hot = path.join(STUDIO_ROOT, "memory", "HOT.md");
+  const hotText = fs.existsSync(hot) ? fs.readFileSync(hot, "utf8") : "";
+  add("Memory vault (memory/HOT.md)", Boolean(hotText), hotText ? `generated ${(hotText.match(/generated_at: (\S+)/) || [])[1] || "?"}` : "missing", { required: false, fix: "node tools/memory/build-hot.mjs" });
+  try {
+    const stale = buildAll(STUDIO_ROOT, { write: false }).outputs.filter((o) => o.changed).map((o) => o.rel);
+    add("Memory generated notes", !stale.length, stale.length ? `stale: ${stale.join(", ")}` : "up to date", { required: false, fix: "node tools/memory/build-hot.mjs (or /sync)" });
+  } catch (e) { add("Memory generated notes", false, e.message, { required: false, fix: "node tools/memory/build-hot.mjs" }); }
+  try {
+    const r = lint(STUDIO_ROOT);
+    const fails = r.findings.filter((f) => f.level === "FAIL").length;
+    add("Memory lint", !fails, `${r.count} notes, ${fails} FAIL, ${r.findings.length - fails} WARN`, { required: false, fix: "node tools/memory/lint.mjs and fix the lines it names" });
+  } catch (e) { add("Memory lint", false, e.message, { required: false, fix: "node tools/memory/lint.mjs" }); }
+  const settings = ["settings.json", "settings.local.json"].map((f) => { try { return fs.readFileSync(path.join(STUDIO_ROOT, ".claude", f), "utf8"); } catch { return ""; } }).join("\n");
+  const hooks = ["session-start.mjs", "pre-compact.mjs"].filter((h) => settings.includes(h));
+  add("Memory hooks (.claude/settings.json)", hooks.length === 2, hooks.length === 2 ? "SessionStart + PreCompact installed" : `${hooks.length} of 2 installed`, { required: false, fix: "Slava pastes the block from docs/hooks-paste-block.md (sessions read HOT themselves until then)" });
+  try {
+    const st = obsidianStatus(STUDIO_ROOT);
+    add("Obsidian app", Boolean(st.app), st.app ? `v${st.version || "?"} at ${st.app}${st.running ? " (running)" : " (closed)"}` : "not installed", { required: false, fix: "winget install Obsidian.Obsidian (optional: the vault works on plain files)" });
+    if (st.app) add("Obsidian vault + CLI", Boolean(st.vaultId) && st.cliEnabled && Boolean(st.cli), `${st.vaultId ? "vault registered" : "vault NOT registered"}, CLI ${st.cliEnabled ? "enabled" : "off"}${st.cli ? "" : ", Obsidian.com missing"}`, { required: false, fix: "node tools/memory/obsidian-setup.mjs (no click needed; close and reopen Obsidian once if it was open)" });
+  } catch (e) { add("Obsidian app", false, e.message, { required: false }); }
+}
+
 async function main() {
   const { flags } = parseArgs(process.argv.slice(2));
   const plugin = checkEnvironment();
   checkHyperframes(plugin);
+  checkMemory();
   if (flags.render) await smokeRender();
   const failedRequired = results.filter((r) => r.required && !r.ok);
   const lines = results.map((r) => `${r.ok ? "ok " : r.required ? "FAIL" : "opt"} ${r.name.padEnd(36)} ${r.detail}${!r.ok && r.fix ? `\n    fix: ${r.fix}` : ""}`);

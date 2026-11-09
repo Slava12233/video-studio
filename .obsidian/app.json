@@ -1,0 +1,21 @@
+{
+  "userIgnoreFilters": [
+    "node_modules/",
+    ".git/",
+    ".claude/",
+    ".studio-smoke/",
+    "deliverables/",
+    "/\\/(renders|snapshots|review|\\.hf-segments|\\.media|\\.transcode-cache|\\.hyperframes|fonts|node_modules)\\//",
+    "/\\/ai\\/(clips|frames|images|audio)\\//"
+  ],
+  "showUnsupportedFiles": false,
+  "alwaysUpdateLinks": true,
+  "newFileLocation": "folder",
+  "newFileFolderPath": "memory/inbox",
+  "attachmentFolderPath": "memory/archive/attachments",
+  "useMarkdownLinks": false,
+  "promptDelete": true,
+  "strictLineBreaks": false,
+  "showFrontmatter": false,
+  "propertiesInDocument": "visible"
+}

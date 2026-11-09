@@ -15,8 +15,11 @@ argument-hint: [--render]
    - Node / Git / FFmpeg missing: `winget install OpenJS.NodeJS.LTS`, `winget install Git.Git`,
      `winget install Gyan.FFmpeg`; reopen the terminal.
    - Claude Code missing: `irm https://claude.ai/install.ps1 | iex` (the winget package does not auto-update).
-   - HyperFrames plugin missing: `/reload-plugins`; still missing: `claude plugin marketplace add heygen-com/hyperframes`
-     then `claude plugin install hyperframes@hyperframes`, restart Claude.
+   - HyperFrames skills missing (`/hf:hyperframes`): start Claude from the studio root, trust the folder,
+     `/reload-plugins`. `node tools/vendor-hyperframes.mjs --check` names drift in the vendored copy; restore it with
+     `node tools/vendor-hyperframes.mjs` (needs the plugin once under `~/.claude/plugins`:
+     `claude plugin marketplace add heygen-com/hyperframes` then `claude plugin install hyperframes@hyperframes`).
+     Skills shown twice (`hyperframes:` and `hf:`): Slava turns the marketplace copy off in `.claude/settings.json`.
    - HyperFrames CLI not responding: first use needs internet (npm download); wait a minute, run the doctor again.
    - Render browser missing: `node tools/hf.mjs browser ensure` (about 150 MB once).
    - `FAL_KEY` missing: put the key after `FAL_KEY=` in `.env` (see `.env.example`). Never ask for the key in chat.

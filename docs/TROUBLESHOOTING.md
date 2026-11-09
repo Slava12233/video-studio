@@ -8,9 +8,18 @@ Start with `/studio-doctor` (`node tools/doctor.mjs`, add `--render` to prove th
 `Gyan.FFmpeg`) or `irm https://claude.ai/install.ps1 | iex` for Claude Code (the winget Claude package does not
 auto-update). Reopen the terminal: new programs appear on PATH only in new windows.
 
-**HyperFrames plugin missing (`/hyperframes:hyperframes` not found).** `/reload-plugins`; still missing:
-`claude plugin marketplace add heygen-com/hyperframes` then `claude plugin install hyperframes@hyperframes`, restart
-Claude. `node tools/hf.mjs --where` prints the plugin root and version the tools will use.
+**HyperFrames skills missing (`/hf:hyperframes` not found).** They ship in the repo as a plugin folder
+(`.claude/skills/hyperframes-plugin/`, loaded in place as `hf@skills-dir`). Start Claude from the studio root (a plugin
+folder is read from the primary working directory only, never from a parent), trust the folder, `/reload-plugins`.
+Still missing: `node tools/vendor-hyperframes.mjs --check` names drift or a missing folder; restore with
+`node tools/vendor-hyperframes.mjs`, which needs the plugin once under `~/.claude/plugins`
+(`claude plugin marketplace add heygen-com/hyperframes` then `claude plugin install hyperframes@hyperframes`).
+`node tools/hf.mjs --where` prints the root, the source (vendored / installed / cache) and the version the tools use.
+
+**Every HyperFrames skill appears twice (`/hyperframes:x` and `/hf:x`).** The marketplace copy is still enabled for
+this project. Slava sets `"hyperframes@hyperframes": false` under `enabledPlugins` in `.claude/settings.json` (or runs
+`claude plugin disable hyperframes@hyperframes --scope project`), then `/reload-plugins`. The repo's copy is named `hf`
+on purpose: Claude Code refuses a plugin folder whose name matches an installed marketplace plugin, even a disabled one.
 
 **First `hyperframes` command hangs for minutes.** It downloads the render browser (~150 MB) once. Wait, or run
 `node tools/hf.mjs browser ensure` and watch the progress.

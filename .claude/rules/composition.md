@@ -5,8 +5,8 @@ paths:
 ---
 # HyperFrames compositions (loads when touching a composition or a build script)
 
-The plugin's skills are the source of truth for the authoring contract: `hyperframes:hyperframes-core` before writing
-composition HTML, `hyperframes:hyperframes-animation` / `hyperframes-keyframes` for motion, `hyperframes-audio` for
+The plugin's skills are the source of truth for the authoring contract: `hf:hyperframes-core` before writing
+composition HTML, `hf:hyperframes-animation` / `hyperframes-keyframes` for motion, `hyperframes-audio` for
 mixing, `hyperframes-registry` before hand-building any named effect. Do not improvise HTML-to-video rules.
 
 ## Launcher and loop

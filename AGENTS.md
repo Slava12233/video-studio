@@ -8,3 +8,7 @@ order, then `docs/WORKFLOWS.md` and `docs/FIELD-NOTES.md`. The short version:
 - Renders and `ffmpeg` run bounded (`timeout N` first), foreground, one at a time on this laptop.
 - Paid fal.ai steps print an estimate and wait for an explicit go; every call is ledgered; every AI asset is labeled
   on screen; `inputs/` is read-only; keys never leave `.env`.
+- The memory is the Obsidian vault in `memory/` (contract `memory/README.md`): read `memory/HOT.md` first, then the
+  lane map in `memory/maps/`; write a stage change, a ruling, a lesson or an open item in the same turn with
+  `tools/memory/log.mjs` and `tools/memory/new-note.mjs`; sub-agents only propose in `memory/inbox/proposals.md`;
+  `/sync` closes the session. Never hand-edit a generated note (`HOT.md`, `INDEX.md`, `capabilities/*`).

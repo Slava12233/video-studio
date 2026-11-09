@@ -1,0 +1,11 @@
+{
+  "items": [
+    { "type": "file", "ctime": 1762700000000, "path": "memory/HOME.md", "title": "HOME" },
+    { "type": "file", "ctime": 1762700000001, "path": "memory/inbox/owner.md", "title": "תיבת הדואר" },
+    { "type": "file", "ctime": 1762700000002, "path": "memory/state/current.md", "title": "המצב הנוכחי" },
+    { "type": "file", "ctime": 1762700000003, "path": "memory/state/roadmap.md", "title": "מפת הדרכים" },
+    { "type": "file", "ctime": 1762700000004, "path": "memory/HOT.md", "title": "HOT" },
+    { "type": "file", "ctime": 1762700000005, "path": "memory/README.md", "title": "החוזה של הזיכרון" },
+    { "type": "file", "ctime": 1762700000006, "path": "docs/OBSIDIAN.md", "title": "המדריך ל-Obsidian" }
+  ]
+}

@@ -26,8 +26,8 @@ Arguments: `$ARGUMENTS`.
    brand words, numbers and anything that does not parse as language. Edit entries in place (keep start/end), never
    merge two words into one entry. Write the corrected list to `words.corrected.json` when the fixes are many.
 5. A missing or mistimed word: fix the text and keep the neighbours' times; caption timing tolerates 80 ms.
-6. Continue: `/caption-cues` for the Hebrew cue plan, then `hyperframes:embedded-captions` (subtitles) or
-   `hyperframes:talking-head-recut` (graphic overlays); both look for `transcript.json` in the project root.
+6. Continue: `/caption-cues` for the Hebrew cue plan, then `hf:embedded-captions` (subtitles) or
+   `hf:talking-head-recut` (graphic overlays); both look for `transcript.json` in the project root.
 
 Notes: the audio is sent as a small mono MP3 inside the request; nothing is stored on fal beyond the request history.
 The key is never printed.

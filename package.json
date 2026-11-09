@@ -4,15 +4,26 @@
   "private": true,
   "type": "module",
   "description": "Claude Code video studio: HyperFrames (HTML to video) + fal.ai generation, Hebrew-first.",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "doctor": "node tools/doctor.mjs",
     "doctor:render": "node tools/doctor.mjs --render",
     "hf": "node tools/hf.mjs",
+    "hf:vendor": "node tools/vendor-hyperframes.mjs",
+    "hf:check": "node tools/vendor-hyperframes.mjs --check",
     "new": "node tools/new-video.mjs",
     "deliver": "node tools/deliver.mjs",
     "ledger": "node tools/fal/fal.mjs",
     "media": "node tools/media.mjs",
-    "loudnorm": "node tools/loudnorm.mjs"
+    "loudnorm": "node tools/loudnorm.mjs",
+    "memory:hot": "node tools/memory/build-hot.mjs",
+    "memory:caps": "node tools/memory/build-capabilities.mjs",
+    "memory:lint": "node tools/memory/lint.mjs",
+    "memory:check": "node tools/memory/build-hot.mjs --check && node tools/memory/build-capabilities.mjs --check && node tools/memory/lint.mjs",
+    "memory:test": "node --test tools/memory/tools.test.mjs",
+    "obsidian": "node tools/memory/obsidian-setup.mjs",
+    "sync": "node tools/memory/build-capabilities.mjs && node tools/memory/build-hot.mjs --by sync && node tools/memory/lint.mjs"
   }
 }

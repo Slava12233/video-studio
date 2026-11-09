@@ -1,0 +1,20 @@
+# Written by tools/vendor-hyperframes.mjs: the vendored release travels whole, so files the repo's ignore rules would drop are re-included here.
+!/skills/media-use/audio/assets/sfx/chime.mp3
+!/skills/media-use/audio/assets/sfx/click-soft.mp3
+!/skills/media-use/audio/assets/sfx/click.mp3
+!/skills/media-use/audio/assets/sfx/error.mp3
+!/skills/media-use/audio/assets/sfx/glitch-1.mp3
+!/skills/media-use/audio/assets/sfx/glitch-2.mp3
+!/skills/media-use/audio/assets/sfx/glitch-3.mp3
+!/skills/media-use/audio/assets/sfx/impact-bass-1.mp3
+!/skills/media-use/audio/assets/sfx/impact-bass-2.mp3
+!/skills/media-use/audio/assets/sfx/key-press.mp3
+!/skills/media-use/audio/assets/sfx/notification.mp3
+!/skills/media-use/audio/assets/sfx/ping.mp3
+!/skills/media-use/audio/assets/sfx/pop.mp3
+!/skills/media-use/audio/assets/sfx/riser.mp3
+!/skills/media-use/audio/assets/sfx/sparkle.mp3
+!/skills/media-use/audio/assets/sfx/typing.mp3
+!/skills/media-use/audio/assets/sfx/whoosh-cinematic.mp3
+!/skills/media-use/audio/assets/sfx/whoosh-short.mp3
+!/skills/media-use/audio/assets/sfx/whoosh.mp3

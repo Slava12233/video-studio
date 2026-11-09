@@ -1,0 +1,2 @@
+# Written by tools/vendor-hyperframes.mjs: the vendored release travels whole, so files the repo's ignore rules would drop are re-included here.
+!transcript.json

@@ -1,0 +1,139 @@
+{
+  "name": "hyperframes",
+  "manifestName": "hf",
+  "skillsTypedAs": "/hf:<skill>",
+  "version": "0.8.160",
+  "license": "Apache-2.0",
+  "repository": "https://github.com/heygen-com/hyperframes",
+  "source": {
+    "from": "C:\\Users\\Admin\\.claude\\plugins\\cache\\hyperframes\\hyperframes\\0.8.160",
+    "marketplaceEntry": "hyperframes@hyperframes",
+    "gitCommitSha": "695110e46ba4ec971f5dcfc797ce8bf750e1029d",
+    "installedAt": "2026-09-30T10:55:52.404Z"
+  },
+  "vendoredAt": "2026-11-09T19:08:41.838Z",
+  "by": "tools/vendor-hyperframes.mjs",
+  "loadsAs": "hf@skills-dir (a plugin folder under .claude/skills/, loaded in place; .claude-plugin/plugin.json renamed from \"hyperframes\" because an installed hyperframes@hyperframes would shadow a same-named copy)",
+  "normalisation": "text files LF, binaries verbatim; every sha256 below is computed on the stored bytes",
+  "gitignoreShims": [
+    ".gitignore",
+    "skills/embedded-captions/scripts/fixtures/heroless/.gitignore"
+  ],
+  "files": 947,
+  "bytes": 16592526,
+  "payload": {
+    ".claude-plugin/plugin.json": "a3dd48553b109385b06c9a4c0139724fc81e68715d271b85243b0bf01f334ca2",
+    "plugin.json": "9b3af13685c1f5ece9e05287e267d2ef9e1e09d07df2b0558c282f33f4c8378c",
+    "LICENSE": "4259155fb06f127687ee7b0a8a3682d45132db0f2da26cbc0b7a2d1e796436b8",
+    "skills-manifest.json": "f768d1f7f13a3da93fe4185690dd49f3ac250588843c8749c0b35e1595b8ba03",
+    ".gitignore": "83d5d5e38b78c36d99d8127c7db9ddac9c8e8e10fe92f99010c8f8aa0d3fc8a9"
+  },
+  "skills": {
+    "embedded-captions": {
+      "files": 146,
+      "bytes": 3501649,
+      "sha256": "6767f7ecaf21432122264fbc252f6414c420f501dbe01910486ab66c1facd971"
+    },
+    "faceless-explainer": {
+      "files": 29,
+      "bytes": 291092,
+      "sha256": "342bba3a3e8a581a9a584967a081a5e455ef5c7ba8636cc31c5aedef9b55fa36"
+    },
+    "figma": {
+      "files": 2,
+      "bytes": 23362,
+      "sha256": "5aaeb67434360d9336e38443c4de9a6dc91e7f955bb3c3438b1514587b665405"
+    },
+    "general-video": {
+      "files": 6,
+      "bytes": 36941,
+      "sha256": "90e5fef65c7540b8b9186c7f5188bc55ef39de4370928692b403a2eaaf0208c3"
+    },
+    "hyperframes": {
+      "files": 31,
+      "bytes": 155411,
+      "sha256": "86ef00b857af67a1f6a9d6e69b47a4208d851a5c9051e66dbe3ce040e959ab53"
+    },
+    "hyperframes-animation": {
+      "files": 122,
+      "bytes": 1243956,
+      "sha256": "ee554a55c9ac98e0228e44141b24593c7ac44411b5a10c487129ddff4c1f4a45"
+    },
+    "hyperframes-audio": {
+      "files": 8,
+      "bytes": 102618,
+      "sha256": "c48e91da52b1f206f2e689cbc1dd4dd6b7772bb60366937f61a10aac10635623"
+    },
+    "hyperframes-cli": {
+      "files": 11,
+      "bytes": 131177,
+      "sha256": "1d300e6a88c7af92001c1e3dd56c3c8d98cdc345adad3a96b06be686917a87b8"
+    },
+    "hyperframes-core": {
+      "files": 11,
+      "bytes": 100475,
+      "sha256": "d5e6bc6d53992c14bf4516521de0cc5901791b32ce2c0c7f76cb133429c49c12"
+    },
+    "hyperframes-creative": {
+      "files": 79,
+      "bytes": 1203424,
+      "sha256": "13650914d115b6f68758978845685ebc07246771fa300138615e7a7992e18e8d"
+    },
+    "hyperframes-keyframes": {
+      "files": 3,
+      "bytes": 23175,
+      "sha256": "67813bf255d05fb1f2c5069b1f5ba689b62d377021ceda734be6ee2a9cbdcc40"
+    },
+    "hyperframes-registry": {
+      "files": 12,
+      "bytes": 81153,
+      "sha256": "1ecfb53a7d7260706f101209a7507ee12bfc21aa42cd02cc54edb5d4f1ce0ab2"
+    },
+    "hyperframes-studio": {
+      "files": 1,
+      "bytes": 11640,
+      "sha256": "2807c2a81e84a411b10680ec6188229be51c17554019871db821b068b8853f36"
+    },
+    "media-use": {
+      "files": 112,
+      "bytes": 1834336,
+      "sha256": "5a29f65e8f8a3274594262b4c4cc9124ae5f05f718dbea7657c645952921947b"
+    },
+    "motion-graphics": {
+      "files": 23,
+      "bytes": 116068,
+      "sha256": "fe18102a4f5fcf1d397c53903e0addc92d07877da366e6147d5b8d9fe4c1f099"
+    },
+    "music-to-video": {
+      "files": 169,
+      "bytes": 6226688,
+      "sha256": "955affc77de8324b157094035ed717f8ed55ec69e5b0b857a635b6bdd616ec1a"
+    },
+    "pr-to-video": {
+      "files": 35,
+      "bytes": 366708,
+      "sha256": "8f9230591fdc2a983db78f7c97b4db2a1519ab5f9af67586bca84fd6ca4e4c12"
+    },
+    "product-launch-video": {
+      "files": 37,
+      "bytes": 349499,
+      "sha256": "67fb28f3b9d464b642c63e3d9a5f8d364e0f1830912692a696b5f793701c5b4f"
+    },
+    "remotion-to-hyperframes": {
+      "files": 77,
+      "bytes": 180652,
+      "sha256": "0cdf815f06d3f74b8b52ac2821e77d930bccfa7606d658115951fb4eb377f9e2"
+    },
+    "slideshow": {
+      "files": 2,
+      "bytes": 78085,
+      "sha256": "79d3a6770e59f649007601a3e00587346024182d21703092b9d604c66fcf6faa"
+    },
+    "talking-head-recut": {
+      "files": 28,
+      "bytes": 520874,
+      "sha256": "8e94bb697545bda50f1f8a44bbef76ab1dce2aea832ecf90c376118a17c145ce"
+    }
+  },
+  "sha256": "564a6451a403ade927878d399ec4b58da4d826d86efae81a2358cb7129bd59c3"
+}
