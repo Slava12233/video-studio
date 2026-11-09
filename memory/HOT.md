@@ -5,9 +5,9 @@ status: active
 maintained_by: generated
 categories: [memory]
 summary: What every session must know, generated from the vault notes; injected by the SessionStart hook.
-generated_at: 2026-11-09T21:21+02:00
+generated_at: 2026-11-09T21:24+02:00
 generated_by: /sync
-content_hash: 3cd25f368da845e2
+content_hash: 946454e082ed000b
 ---
 
 # HOT
@@ -19,12 +19,11 @@ Read the note before you act; verify on the files before you change them; names 
 Next actions:
 1. Slava: put the fal.ai key after `FAL_KEY=` in `.env` (missing on 2026-11-09, by name); then `/studio-doctor` once (a new session also confirms only `hf:*` HyperFrames skills are listed).
 2. First video: `/new-video <type> <slug>`; the project note is created with the folder; fill the brief; build with `hf:hyperframes`; `/sync` at the end of the session.
-3. Slava: `git commit` of the second brain and the vendored HyperFrames plugin when he is ready (the harness never commits unasked); optionally `winget upgrade Obsidian.Obsidian` (1.13.7 → 1.15.0, needs admin).
+3. Slava, optional: `winget upgrade Obsidian.Obsidian` (1.13.7 → 1.15.0, needs admin); nothing here needs it.
 Projects in flight (0):
 - none
 
-## Open items by owner (2)
-- slava · [[2026-11-09-commit-the-second-brain]] · Slava: the second brain, the vendored HyperFrames plugin (.claude/skills/hyperframes-plugin/, 18 MB) and the Hebrew-language CLAUDE.md change are uncommitted i…
+## Open items by owner (1)
 - slava · [[2026-11-09-fal-key-missing]] · Slava: put the fal.ai key after FAL_KEY= in .env (missing on 2026-11-09 by name); without it no generation, TTS, avatar or Hebrew transcription runs.
 
 ## Newest lessons (5 of 7)

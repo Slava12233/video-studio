@@ -5,9 +5,9 @@ status: active
 maintained_by: generated
 categories: [memory]
 summary: One line per note in the vault, grouped by folder, newest first; generated, grep it.
-generated_at: 2026-11-09T21:21+02:00
+generated_at: 2026-11-09T21:24+02:00
 generated_by: /sync
-content_hash: 3872f9862bfa0929
+content_hash: 8a829ef76e942974
 ---
 
 # INDEX
@@ -65,7 +65,7 @@ Never hand-edit; run node tools/memory/build-hot.mjs
 - [[2026-11-09-turn-the-marketplace-hyperframes-copy-off]] · open · Done 2026-11-09: on Slava's yes in chat the harness set "hyperframes@hyperframes": false under enabledPlugins in .claude/settings.json and dropped its extraKnownMarketplaces block; from the next session only the vendored hf:* HyperFrames skills load.
 - [[2026-11-09-install-the-memory-hooks]] · open · Done 2026-11-09: on Slava's yes in chat the harness added the three hook events (SessionStart, SubagentStart, PreCompact) to .claude/settings.json; HOT now lands in every session and sub-agent, a checkpoint is written before compaction.
 - [[2026-11-09-fal-key-missing]] · open · Slava: put the fal.ai key after FAL_KEY= in .env (missing on 2026-11-09 by name); without it no generation, TTS, avatar or Hebrew transcription runs.
-- [[2026-11-09-commit-the-second-brain]] · open · Slava: the second brain, the vendored HyperFrames plugin (.claude/skills/hyperframes-plugin/, 18 MB) and the Hebrew-language CLAUDE.md change are uncommitted in the working copy; the harness never commits unasked, so a commit (and a push) is his word.
+- [[2026-11-09-commit-the-second-brain]] · open · Done 2026-11-09: on Slava's "push to git" the harness committed everything (the second brain, the vendored HyperFrames plugin, the Hebrew-language CLAUDE.md change) as dfaf820 with his identity and pushed main to origin; 1080 files, no env file tracked.
 - [[memory/open/_about|_about]] · contract · One note per open item with an owner (slava or harness) and status open until done; HOT and HOME list them by owner.
 
 ## memory/projects

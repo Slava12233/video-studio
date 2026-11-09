@@ -26,6 +26,7 @@ The memory is how this harness evolves: a lesson earned twice becomes a rule or 
 - 2026-11-09 · the second brain: vault contract, tools, hooks, skills, agent, rules, Obsidian registration ([[2026-11-09-second-brain-in-obsidian]])
 - 2026-11-09 · the two memory hooks installed in `.claude/settings.json` on Slava's yes in chat ([[2026-11-09-install-the-memory-hooks]])
 - 2026-11-09 · the HyperFrames plugin release vendored into the repo as the skills-dir plugin `hf` (`tools/vendor-hyperframes.mjs`, `/hf:<skill>` everywhere, the CLI pinned by the repo) ([[2026-11-09-hyperframes-skills-live-in-the-repo]]); the marketplace copy turned off in `.claude/settings.json` on Slava's yes ([[2026-11-09-turn-the-marketplace-hyperframes-copy-off]])
+- 2026-11-09 · the whole day's work committed as `dfaf820` and pushed to `origin/main` on Slava's "push to git" ([[2026-11-09-commit-the-second-brain]])
 
 ## Considered and declined
 

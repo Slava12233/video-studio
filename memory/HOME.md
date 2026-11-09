@@ -11,12 +11,12 @@ summary: Slava's page in Hebrew - today, projects in flight, AI spend, open item
 # האולפן: המוח השני
 
 %% generated:start %%
-%% content_hash: a25ea328455d66a5 · generated_at: 2026-11-09T21:21+02:00 · Never hand-edit; run node tools/memory/build-hot.mjs %%
+%% content_hash: 5dafcd623cd90a11 · generated_at: 2026-11-09T21:24+02:00 · Never hand-edit; run node tools/memory/build-hot.mjs %%
 ### היום
 2026-11-09 · מצב נכון ל-2026-11-09 ([[current]])
 1. Slava: put the fal.ai key after `FAL_KEY=` in `.env` (missing on 2026-11-09, by name); then `/studio-doctor` once (a new session also confirms only `hf:*` HyperFrames skills are listed).
 2. First video: `/new-video <type> <slug>`; the project note is created with the folder; fill the brief; build with `hf:hyperframes`; `/sync` at the end of the session.
-3. Slava: `git commit` of the second brain and the vendored HyperFrames plugin when he is ready (the harness never commits unasked); optionally `winget upgrade Obsidian.Obsidian` (1.13.7 → 1.15.0, needs admin).
+3. Slava, optional: `winget upgrade Obsidian.Obsidian` (1.13.7 → 1.15.0, needs admin); nothing here needs it.
 
 ### פרויקטים בעבודה
 - אין
@@ -25,7 +25,6 @@ summary: Slava's page in Hebrew - today, projects in flight, AI spend, open item
 - אין עדיין
 
 ### פריטים פתוחים לפי בעלים
-- סלבה · [[2026-11-09-commit-the-second-brain]] · Slava: the second brain, the vendored HyperFrames plugin (.claude/skills/hyperframes-plugin/, 18 MB) and the Hebrew-language CLAUDE.md change are unc…
 - סלבה · [[2026-11-09-fal-key-missing]] · Slava: put the fal.ai key after FAL_KEY= in .env (missing on 2026-11-09 by name); without it no generation, TTS, avatar or Hebrew transcription runs.
 
 ### למידות אחרונות
